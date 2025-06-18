@@ -1,9 +1,10 @@
-import React from 'react'
 import AuthForm from '../components/AuthForm'
 import gambar from "../assets/dance cat.png"
 import Button from '../components/Button'
+import { Link } from 'react-router'
 
 const Login = () => {
+  
   return (
     <div className='flex justify-center items-center h-screen w-screen'>
       <AuthForm urlImage={gambar}>
@@ -31,6 +32,7 @@ const Login = () => {
             >
                 Sign In
             </Button>
+            <Link className='text-gray-600' to={"/register"}>Don't Have an Account? Sign Up</Link>
       </AuthForm>
     </div>
   )
