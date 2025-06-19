@@ -88,8 +88,8 @@ app.post('/auth/login', async (req, res)=>{
 
         const token = buatToken(user.id, user.role);
 
-        res.cookie("token", token, {httpOnly:true, sameSite:"strict", maxAge:1000*60*60})//satuan milisecond
-        res.json({redirectUrl: user.role == "ADMIN"? "/admin"  : "/user"})
+        res.cookie("token", token, {httpOnly:true, sameSite:"strict", maxAge:1000*60})//satuan milisecond
+        res.json({redirectUrl: user.role == "ADMIN"? "/admin"  : "/user", message:"Login succeed"})
     } catch (error) {
         console.error(error);
         res.status(500).json({ 
@@ -99,10 +99,13 @@ app.post('/auth/login', async (req, res)=>{
     }
 })
 
-app.post('/auth/logout', (req, res)=>{
-    res.clearCookie('token')
-    res.json({message: "Logout Successfully"})
-    
+app.delete('/auth/logout', (req, res)=>{
+    try {
+        res.clearCookie('token')
+        res.json({message: "Logout Successfully"})
+    } catch (message) {
+        return res.json({message: message})
+    }    
 })
 
 const authenticate = async (req,res, next)=>{
@@ -123,6 +126,10 @@ const otorisasiAdmin =  (req, res, next)=>{
     if(req.user.role !== 'ADMIN') return res.status(403).json({message:"Anda tidak punya akses"})
     next()
 }
+
+app.get("/auth/verify", authenticate, (req, res) => {
+  res.json({ authenticated: true, user: req.user });
+});
 
 app.get('/user', authenticate, async (req, res)=>{
     try {
