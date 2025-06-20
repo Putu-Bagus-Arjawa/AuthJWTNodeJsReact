@@ -53,47 +53,51 @@ const Register = () => {
   return (
     <div className='flex justify-center items-center h-screen w-screen'>
         <AuthForm urlImage={gambar} handleSubmit={handleSubmit}>
-            <h2 className='font-semibold text-2xl'>Welcome New User!</h2> 
-            <p className='text-neutral-400 mb-4'>Register Before Using Our Apps</p>
-            <div className='flex flex-col mb-4'>
-                <label htmlFor="" className='mb-2 font-semibold'>Username</label>
-                <input 
-                    type="text"
-                    className='focus:outline-none border-[0.5px] p-1 rounded-lg'
-                    placeholder='Username'
-                    value={form.username}
-                    onChange={(e)=>{
-                        setForm(restOf =>({...restOf, username: e.target.value}))
-                        if (message.message) setMessage({message:"", type: ""})
-                    }}
+            <div className='flex md:flex-col flex-row items-center md:items-center lg:items-start gap-10 md:gap-0'>
+                <section>
+                    <h2 className='font-semibold md:text-2xl text-[16px] flex justify-center'>Welcome New User!</h2> 
+                    <p className='text-neutral-400 mb-4 md:text-lg text-[14px] flex justify-center'>Register Before Using Our Apps</p>
+                    <div className='flex flex-col mb-4'>
+                        <label htmlFor="" className='mb-2 font-semibold md:text-lg text-[14px]'>Username</label>
+                        <input 
+                            type="text"
+                            className='focus:outline-none border-[0.5px] p-1 rounded-lg text-[14px] md:text-lg'
+                            placeholder='Username'
+                            value={form.username}
+                            onChange={(e)=>{
+                                setForm(restOf =>({...restOf, username: e.target.value}))
+                                if (message.message) setMessage({message:"", type: ""})
+                            }}
 
-                />
-            </div>
-            <div className='flex flex-col mb-4'>
-                <label htmlFor="" className='mb-2 font-semibold'>Password</label>
-                <input 
-                    type="password"
-                    className='focus:outline-none border-[0.5px] p-1 rounded-lg'
-                    placeholder='Enter Your Password...'
-                    value={form.password}
-                    onChange={(e)=>{
-                        setForm(restOf =>({...restOf, password: e.target.value}))
-                        if (message.pesan) setMessage({pesan:"", tipe: ""}) 
-                    }}
-                />
-            </div>
-            <div className='flex flex-col mb-4'>
-                <label htmlFor="" className='mb-2 font-semibold'>Your Position</label>
-                <select
-                    value={form.role}
-                    onChange={(e) =>{ 
-                        setForm(restOf => ({...restOf, role: e.target.value}))
-                        if (message.pesan) setMessage({pesan:"", tipe: ""}) 
-                    }} 
-                >
-                    <option value="ADMIN">ADMIN</option>
-                    <option value="USER">USER</option>
-                </select>
+                        />
+                    </div>
+                    <div className='flex flex-col mb-4'>
+                        <label htmlFor="" className='mb-2 font-semibold md:text-lg text-[14px]'>Password</label>
+                        <input 
+                            type="password"
+                            className='focus:outline-none border-[0.5px] p-1 rounded-lg text-[14px] md:text-lg'
+                            placeholder='Enter Your Password...'
+                            value={form.password}
+                            onChange={(e)=>{
+                                setForm(restOf =>({...restOf, password: e.target.value}))
+                                if (message.pesan) setMessage({pesan:"", tipe: ""}) 
+                            }}
+                        />
+                    </div>
+                </section>
+                <section className='flex flex-col mb-4'>
+                    <label htmlFor="" className='mb-2 font-semibold md:text-lg text-[14px]'>Your Position</label>
+                    <select
+                        value={form.role}
+                        onChange={(e) =>{ 
+                            setForm(restOf => ({...restOf, role: e.target.value}))
+                            if (message.pesan) setMessage({pesan:"", tipe: ""}) 
+                        }} 
+                    >
+                        <option value="ADMIN" className='md:text-lg text-[14px]'>ADMIN</option>
+                        <option value="USER" className='md:text-lg text-[14px]'>USER</option>
+                    </select>
+                </section>
             </div>
             {message.pesan && (
                 <p className={`${message.tipe == "success"? "text-green-600":"text-red-600"}`}>
@@ -101,7 +105,7 @@ const Register = () => {
                 </p>
             )}
             <Button type={"submit"} warna={'bg-emerald-400'}>Sign Up</Button>
-            <Link to={"/login"} className='text-gray-600'>Already have an account?Sign In</Link>
+            <Link to={"/login"} className='text-gray-600 flex justify-center'>Already have an account?Sign In</Link>
         </AuthForm>
       
     </div>
